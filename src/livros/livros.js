@@ -1,6 +1,9 @@
 import prompt from "prompt-sync"
 import menuPrincipal from "../index.js"
 import cadastro from "./cadastro.js"
+
+
+
 function menuLivros() {
     const input = prompt()
     const livros = [
