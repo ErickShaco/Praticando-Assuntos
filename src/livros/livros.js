@@ -14,18 +14,21 @@ function menuLivros() {
         "5- Buscar Livro por ID",
         "0 - Retornar ao menu principal"
     ]
+
     const menu = livros.join("\n")
     console.log(menu)
+
     let opcao = input("Digite a opcao desejada: ")
     switch(opcao) {
         case "0":
             menuPrincipal()
         break
         case "1":
-        cadastro()
+            cadastro()
         break
-        menuLivros()
+            menuLivros()
             default:
         }
 }
+
 export default menuLivros

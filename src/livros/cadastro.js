@@ -15,13 +15,8 @@ function cadastro() {
     const opcao = input("Deseja ve-lo? Digite 1 para Sim e 0 para Nao: ")
 
     switch(opcao) {
-        case "1":
-        console.log(`
-        \nID: ${id}
-        \nTitulo: ${titulo}
-        \nAutor: ${autor}
-        \nEditora: ${editora}
-        \nEmprestado: ${emprestado}`)
+        case "1":   
+        console.log(`ID: ${id}\nTitulo: ${titulo}\nAutor: ${autor}\nEditora: ${editora}\nEmprestado: ${emprestado}`)
         case "0":
             cadastro()
         break
