@@ -3,15 +3,14 @@ import menuLivros from "./livros.js";
 import { dados } from "../../data/livros.js";
 
 const input = Prompt()
-const livros = dados
 
 function cadastro() {
-    let id = Math.floor(Math.random() * 1000).toString()
+    let id = Math.floor(Math.random() * 100000).toString()
     const titulo = input("Digite o Titulo do livro: ")
     const autor = input("Digite o autor do livro: ")
     const editora = input("Digite a Editora do Livro: ")
     const emprestado = false
-    livros.push({id, titulo, autor, editora, emprestado})
+    dados.push({id, titulo, autor, editora, emprestado})
     
 
     console.log(`|||Seu livro foi cadastrado com sucesso!!|||`)
