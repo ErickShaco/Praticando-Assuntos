@@ -1,11 +1,22 @@
 import prompt from "prompt-sync"
 import menuPrincipal from "../index.js"
 import cadastro from "./cadastro.js"
+import buscar_ID from "./buscar_ID.js"
+import { dados } from "../../data/livros.js"
 
+const input = prompt()
 
+const livros = dados
+
+function listarTodosLivros(){
+    console.log(" ========================== ")
+    console.log("|     Todos os Livros      |")
+    console.log(" ========================== ")
+    livros.forEach(livro => console.log(`Id: ${livro.id} - Titulo: ${livro.titulo}`))
+    console.log(" ========================== ")
+}
 
 function menuLivros() {
-    const input = prompt()
     const livros = [
         "1 - Cadastrar Livro",
         "2 - Editar Livro",
@@ -19,6 +30,7 @@ function menuLivros() {
     console.log(menu)
 
     let opcao = input("Digite a opcao desejada: ")
+    console.clear()
     switch(opcao) {
         case "0":
             menuPrincipal()
@@ -26,8 +38,15 @@ function menuLivros() {
         case "1":
             cadastro()
         break
+        case "4":
+            listarTodosLivros()
             menuLivros()
-            default:
+        break
+        case "5":
+            buscar_ID()
+        break
+            menuLivros()
+        default:
         }
 }
 

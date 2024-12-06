@@ -14,6 +14,7 @@ function menuPrincipal(){
     const menu = opcoes.join("\n")
     console.log(menu)
     let opcao = input("Digite a opcao desejada: ")
+    console.clear()
     switch(opcao) {
         case "1" :
         menuLivros()
