@@ -5,6 +5,26 @@ import { dados } from "../../data/livros.js"
 
 const input = prompt()
 
+function excluirLivro(){
+    console.log(`=========================`)
+    console.log(`Qual Livro Deseja Excluir?`)
+    console.log(`=========================`)
+    dados.forEach(dados => console.log(`Temos o Seguinte Livro: ${dados.titulo}`))
+    const excluir = input(`Digite 1 para Excluir o primeiro e 2 para o Segundo: `)
+    switch(dados){
+        case "1":
+        delete dados[1]
+        menuLivros()
+        break
+        case "2":
+        delete dados[2]
+        menuLivros()
+        break
+        default:
+    }
+
+}
+
 
 function listarTodosLivros(){
     console.log(" ========================== ")
@@ -13,6 +33,7 @@ function listarTodosLivros(){
     dados.forEach(livro => console.log(`Id: ${livro.id} - Titulo: ${livro.titulo}`))
     console.log(" ========================== ")
 }
+
 function buscarId(){
     dados.forEach(id => console.log(`No momento nossa lista é ${id.id}`))
     const busca = input("Digite o ID desejado: ")
@@ -21,7 +42,7 @@ function buscarId(){
         console.log(" ======================== ")
         console.log("|     Dados da Busca     |")
         console.log(" ======================== ")
-        console.log(dados.find(p => p.id === 555))
+        dados.forEach(id => console.log(`${id.autor}\n${id. titulo}\n${id.editora}\n${id.emprestado}\n`))
         console.log(" ======================== ")
         break
     }
@@ -49,13 +70,15 @@ function menuLivros() {
         case "1":
             cadastro()
         break
+        case "3":
+            excluirLivro()
+        break
         case "4":
             listarTodosLivros()
             menuLivros()
         break
         case "5":
-            buscarId()
-
+           buscarId()
         break
             menuLivros()
         default:
