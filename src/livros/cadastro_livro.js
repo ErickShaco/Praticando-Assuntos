@@ -5,7 +5,7 @@ import { dados } from "../../data/livros.js";
 const input = Prompt()
 
 function cadastro() {
-    let id = Math.floor(Math.random() * 100000).toString()
+    let id = Math.floor(Math.random() * 1000).toString()
     const titulo = input("Digite o Titulo do livro: ")
     const autor = input("Digite o autor do livro: ")
     const editora = input("Digite a Editora do Livro: ")
@@ -28,5 +28,6 @@ function cadastro() {
         default:
     }
 }
+
 
 export default cadastro

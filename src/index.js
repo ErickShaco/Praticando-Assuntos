@@ -1,6 +1,8 @@
 import prompt from "prompt-sync"
 import menuLivros from "./livros/livros.js"
-import cadastro from "./livros/cadastro.js"
+import cadastro from "./livros/cadastro_livro.js"
+import menuUsuario from "./Usuarios/usuarios.js"
+import { usuarios } from "../data/usuarios.js"
 
 
 function menuPrincipal(){
@@ -16,11 +18,15 @@ function menuPrincipal(){
     let opcao = input("Digite a opcao desejada: ")
     console.clear()
     switch(opcao) {
+        case "0":
+        break
         case "1" :
         menuLivros()
         break
-        menuPrincipal()
+        case "2" :
+            menuUsuario()
         default:
+            menuPrincipal()
     }
 }
 

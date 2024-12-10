@@ -1,30 +1,39 @@
 import prompt from "prompt-sync"
 import menuPrincipal from "../index.js"
-import cadastro from "./cadastro.js"
+import cadastro from "./cadastro_livro.js"
 import { dados } from "../../data/livros.js"
 
 const input = prompt()
 
 function excluirLivro(){
     console.log(`=========================`)
-    console.log(`Qual Livro Deseja Excluir?`)
+    console.log(`|     Excluir Livro     |`)
     console.log(`=========================`)
-    dados.forEach(dados => console.log(`Temos o Seguinte Livro: ${dados.titulo}`))
-    const excluir = input(`Digite 1 para Excluir o primeiro e 2 para o Segundo: `)
-    switch(dados){
-        case "1":
-        delete dados[1]
-        menuLivros()
-        break
-        case "2":
-        delete dados[2]
-        menuLivros()
-        break
-        default:
+    const id = input(`Digite o Id do Livro: `)
+    const index = dados.findIndex(livro => livro.id === id)
+    if(index >= 0){
+        dados.splice(index, 1)
+        console.log(`================================`)
+        console.log(`| Livro Excluido com Sucesso! |`)
+        console.log(`================================`)
+    } else {
+        console.log(`Livro não encontrado :C`)
     }
-
 }
 
+function editarLivros(){
+    const id = input(`Digite o ID do Livro que deseja editar: `)
+    const index = dados.findIndex(livro => livro.id === id)
+    if(index >= 0){
+       const titulo = input(`Titulo: `)
+       const autor = input(`Autor: `)
+       const editora = input(`Editora: `)
+       dados[index]= {...dados[index], titulo, autor, editora}
+       console.log(`Livro Editado com sucesso`)
+    } else{
+        console.log(`Livro não encontrado`)
+    }
+}
 
 function listarTodosLivros(){
     console.log(" ========================== ")
@@ -35,17 +44,21 @@ function listarTodosLivros(){
 }
 
 function buscarId(){
-    dados.forEach(id => console.log(`No momento nossa lista é ${id.id}`))
-    const busca = input("Digite o ID desejado: ")
-    switch(busca){
-        case "555":
+    const id = input("Digite o ID desejado: ")
+    const livro = dados.find(livro => livro.id === id)
+   if(livro => 0){
         console.log(" ======================== ")
         console.log("|     Dados da Busca     |")
         console.log(" ======================== ")
-        dados.forEach(id => console.log(`${id.autor}\n${id. titulo}\n${id.editora}\n${id.emprestado}\n`))
+        console.log(`Autor: ${livro.autor}`)
+        console.log(`Titulo: ${livro.titulo}`)
+        console.log(`Editora: ${livro.editora}`)
+        console.log(`Emprestado: ${livro.emprestado}`)
         console.log(" ======================== ")
-        break
-    }
+   } else {
+    console.log(`Id não encontrado`)
+    console.clear()
+   }
 }
 
 function menuLivros() {
@@ -69,9 +82,14 @@ function menuLivros() {
         break
         case "1":
             cadastro()
+            menuLivros()
         break
+        case "2":
+            editarLivros()
+            menuLivros()
         case "3":
             excluirLivro()
+            menuLivros()
         break
         case "4":
             listarTodosLivros()
@@ -79,9 +97,10 @@ function menuLivros() {
         break
         case "5":
            buscarId()
+           menuLivros()
         break
-            menuLivros()
         default:
+            menuLivros()
         }
 }
 
