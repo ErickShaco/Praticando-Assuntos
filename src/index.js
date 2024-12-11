@@ -3,6 +3,7 @@ import menuLivros from "./livros/livros.js"
 import cadastro from "./livros/cadastro_livro.js"
 import menuUsuario from "./Usuarios/usuarios.js"
 import { usuarios } from "../data/usuarios.js"
+import menuEmprestimo from "./Emprestimos/emprestimos.js"
 
 
 function menuPrincipal(){
@@ -25,6 +26,9 @@ function menuPrincipal(){
         break
         case "2" :
             menuUsuario()
+        case "3" :
+            menuEmprestimo()
+        break
         default:
             menuPrincipal()
     }

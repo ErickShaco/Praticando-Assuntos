@@ -7,5 +7,12 @@ export const usuarios = [
         email: "Diego69@email.com"
 
     },
+    {
+        cpf: "70697896455",
+        nome: "Maria",
+        telefone: "84 999588846",
+        email: "Maria02@email.com"
+
+    },
 
 ]
