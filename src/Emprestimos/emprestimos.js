@@ -8,7 +8,6 @@ import { dados as livros} from "../../data/livros.js"
 const input = prompt()
 
 function realizarEmprestimo(){
-        let id = Math.floor(Math.random() * 1000).toString()
         let usuarioCpf = input("Digite o CPF do Usuario: ")
         while(!usuarios.find(usuario => usuario.cpf === usuarioCpf)){
             console.log("+-----------------------------------+")
@@ -41,14 +40,27 @@ function realizarEmprestimo(){
 
         const Livros = livros.find(livro => livro.id === livroId)
         livros.emprestado = true
-        const dataAtual = new Date().getTime().toString()
+        const id = new Date().getTime().toString()
         const dataEmprestimo = new Date().toLocaleDateString()
-        const dataDevolucao = input(`Digite uma data para a Devolver o Livro: `)
-        emprestimo.push({id, usuarioCpf, livroId, dataEmprestimo, dataDevolucao})
+        emprestimo.push({id, usuarioCpf, livroId, dataEmprestimo})
         
         console.log("+-----------------------------------+")
         console.log("| Empréstimo realizado com sucesso! |")
         console.log("+-----------------------------------+")
+} 
+    
+    
+    function realizarDevolucao(){
+    const id = input(`Digite o ID do emprestimo para realizar a devolução: `)
+    const livroId = input(`Digite o ID do livro: `)
+    while(!emprestimo.find(emprestimo => emprestimo.id === id)){
+            console.log("|     Emprestimo não encontrado!    |")
+            return
+    }
+    const livroId = input(`Digite o ID do livro: `)
+    emprestimo.dataDevolucao = new Date().toLocaleDateString()
+    const Livros = livros.find(livro => livro.id === livroId)
+    livros.emprestado = false
 
 }
 
@@ -91,10 +103,11 @@ function menuEmprestimo() {
         case "2":
 
         case "3":
-
+            realizarDevolucao()
+            menuEmprestimo()
         break
         case "4":
-            listarTodosEmprestimos()
+            listarEmprestimos()
             menuEmprestimo()
         break
         case "5":

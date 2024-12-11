@@ -9,7 +9,7 @@ export const dados = [
     },
     {
         id : "555",
-        titulo: "Beserk",
+        titulo: "Berserk",
         autor: "Miura",
         editora: "MangaJump",
         emprestado: false
