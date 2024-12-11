@@ -6,21 +6,50 @@ import { usuarios } from "../../data/usuarios.js"
 import { dados as livros} from "../../data/livros.js"
 
 const input = prompt()
-const dataAtual = Date.now()
 
 function realizarEmprestimo(){
         let id = Math.floor(Math.random() * 1000).toString()
         let usuarioCpf = input("Digite o CPF do Usuario: ")
-        while(!usuarios.find(usuario => usuario.cpf === usuarioCpf))
-            break
+        while(!usuarios.find(usuario => usuario.cpf === usuarioCpf)){
+            console.log("+-----------------------------------+")
+            console.log("| Usuário não encontrado!           |")
+            console.log("+-----------------------------------+\n")
+            console.log("+-----------------------------------+")
+            console.log("| Deseja voltar ao menu?            |")
+            console.log("| 0 - Sim                           |")
+            console.log("| 1 - Não                           |")
+            console.log("+-----------------------------------+")
+            const opcao = input("* Digite a opção desejada: ")
+            if (opcao === "0") menuEmprestimos()
+            usuarioCpf = input("| * Digite o CPF do usuário: ")
+        }
+
         const livroId = input("Digite o ID do Livro: ")
-        while(!usuarios.find(usuario => usuario.cpf === usuarioCpf))
-            break
-        const dataEmprestimo = dataAtual.toString().split(`T`)[0]
-        const emprestado = true
-        const livro = livros.find(livro => livro.emprestado === emprestado)
+        while(!livros.find(livro => livro.id === livroId)){
+            console.log("+-----------------------------------+")
+            console.log("| Livro não encontrado!             |")
+            console.log("+-----------------------------------+\n")
+            console.log("+-----------------------------------+")
+            console.log("| Deseja voltar ao menu?            |")
+            console.log("| 0 - Sim                           |")
+            console.log("| 1 - Não                           |")
+            console.log("+-----------------------------------+")
+            const opcao = input("* Digite a opção desejada: ")
+            if (opcao === "0") menuEmprestimos()
+            livroId = input("| * Digite o ID do livro: ")
+        }
+
+        const Livros = livros.find(livro => livro.id === livroId)
+        livros.emprestado = true
+        const dataAtual = new Date().getTime().toString()
+        const dataEmprestimo = new Date().toLocaleDateString()
         const dataDevolucao = input(`Digite uma data para a Devolver o Livro: `)
         emprestimo.push({id, usuarioCpf, livroId, dataEmprestimo, dataDevolucao})
+        
+        console.log("+-----------------------------------+")
+        console.log("| Empréstimo realizado com sucesso! |")
+        console.log("+-----------------------------------+")
+
 }
 
 function listarEmprestimos(){
@@ -28,8 +57,8 @@ function listarEmprestimos(){
     console.log(`|    Todos os Emprestimos    |`)
     console.log(`==============================`)
     emprestimo.forEach(emprestimo => {
-        const usuario = usuarios.find(usuario => usuario.cpf === emprestimo.usuarioCpf)
         const livro = livros.find(livro => livro.id === emprestimo.livroId)
+        const usuario = usuarios.find(usuario => usuario.cpf === emprestimo.usuarioCpf)
         console.log(`| ID: ${emprestimo.id} - Data de emprestimo: ${emprestimo.dataEmprestimo}`)
         console.log(`| Usuario: ${usuario.nome} - Livro: ${livro.titulo}\n`)
     })
@@ -65,7 +94,7 @@ function menuEmprestimo() {
 
         break
         case "4":
-            listarEmprestimos()
+            listarTodosEmprestimos()
             menuEmprestimo()
         break
         case "5":
