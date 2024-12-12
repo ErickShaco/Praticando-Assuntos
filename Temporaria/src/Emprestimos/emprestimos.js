@@ -1,9 +1,9 @@
 import prompt from "prompt-sync";
 
 import menuPrincipal from "../index.js ";
-import { emprestimo } from "../../data/emprestimos.js";
-import { usuarios } from "../../data/usuarios.js"
-import { dados as livros} from "../../data/livros.js"
+import { emprestimo } from "../data/emprestimos.js";
+import { usuarios } from "../data/usuarios.js"
+import { dados as livros} from "../data/livros.js"
 
 const input = prompt()
 
@@ -34,7 +34,7 @@ function realizarEmprestimo(){
             console.log("| 1 - Não                           |")
             console.log("+-----------------------------------+")
             const opcao = input("* Digite a opção desejada: ")
-            if (opcao === "0") menuEmprestimos()
+            if (opcao === "0") menuEmprestimo()
             livroId = input("| * Digite o ID do livro: ")
         }
 
@@ -47,21 +47,21 @@ function realizarEmprestimo(){
         console.log("+-----------------------------------+")
         console.log("| Empréstimo realizado com sucesso! |")
         console.log("+-----------------------------------+")
-} 
-    
+}
     
     function realizarDevolucao(){
     const id = input(`Digite o ID do emprestimo para realizar a devolução: `)
-    const livroId = input(`Digite o ID do livro: `)
     while(!emprestimo.find(emprestimo => emprestimo.id === id)){
             console.log("|     Emprestimo não encontrado!    |")
             return
     }
-    const livroId = input(`Digite o ID do livro: `)
-    emprestimo.dataDevolucao = new Date().toLocaleDateString()
-    const Livros = livros.find(livro => livro.id === livroId)
+    const dataDevolucao = emprestimo.dataDevolucao = new Date().toLocaleDateString()
+    const Livros = livros.find(livro => livro.id === emprestimo.livroId)
     livros.emprestado = false
 
+    console.log("+-----------------------------------+")
+    console.log("|  Devoluçâo Realizada com Sucesso! |")
+    console.log("+-----------------------------------+")
 }
 
 function listarEmprestimos(){
@@ -76,6 +76,11 @@ function listarEmprestimos(){
     })
 }
 
+function buscarEmprestimo(){
+    const busca = input(`Digite o ID do Emprestimo: `)
+    const buscaId = emprestimo.find(emprestimo => emprestimo.id === id)
+    
+}
 
 function menuEmprestimo() {
     const livros = [

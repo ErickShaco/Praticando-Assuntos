@@ -1,6 +1,6 @@
 import Prompt from "prompt-sync";
 import menuLivros from "./livros.js";
-import { dados } from "../../data/livros.js";
+import { dados } from "../data/livros.js";
 
 const input = Prompt()
 

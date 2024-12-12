@@ -1,5 +1,5 @@
 import Prompt from "prompt-sync"
-import { usuarios } from "../../data/usuarios.js"
+import { usuarios } from "../data/usuarios.js"
 import menuPrincipal from "../index.js"
 
 

@@ -1,7 +1,7 @@
 import prompt from "prompt-sync"
 import menuPrincipal from "../index.js"
 import cadastro from "./cadastro_livro.js"
-import { dados } from "../../data/livros.js"
+import { dados } from "../data/livros.js"
 
 const input = prompt()
 
