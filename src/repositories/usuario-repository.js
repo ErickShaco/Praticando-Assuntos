@@ -1,7 +1,7 @@
 
-import { database } from "./database.js"
+import database from "./database.js";
 
-export const usuariosRepository = {
+export const usuarioRepository = {
     // Listar Todos
     findAll: () => database.usuarios,
     // Buscar por Cpf
@@ -10,15 +10,16 @@ export const usuariosRepository = {
     },
     // Salvar 
     save:(usuario) => {
-        database.usuarios.push(usuario)
+        const isUserExists = usuarioRepository.findByCpf(usuario.cpf)
+        if (isUserExists) {
+            Object.assign(isUserExists, usuario);
+            return isUserExists;
+        } else {
+            database.usuarios.push(usuario);
+            return usuario;
+        }
     },
-    // Atualizar Usuario
-    update: (cpf, nome, fone, email) => {
-        const usuario = findByCpf()
-        usuario.nome = nome
-        usuario.fone = fone
-        usuario.email = email
-    },
+
     // Excluir Usuario
     remove: (cpf) => {
         const index = database.usuarios.findIndex(usuario => usuario.cpf === cpf)

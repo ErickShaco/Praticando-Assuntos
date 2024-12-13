@@ -1,26 +1,58 @@
-import { database } from "./database.js"
+import database from './database.js';
 
-export const 
-export const findAll = () => database.livros
+/**
+ * Repositório de livros para manipular os dados armazenados no banco de dados.
+ */
+export const livroRepository = {
+    
+    /**
+     * Retorna todos os livros no banco de dados.
+     * @returns {Array} Lista de livros.
+     */
+    findAll: () => database.livros,
 
-export const findByid = (id) => {
-    database.livros.find(livro => livro.id === id)
-}
+    /**
+     * Busca um livro pelo Id
+     * @param {string} id - O Id do livro a ser buscado.
+     * @returns {Object|undefined} O livro encontrado ou undefined se não encontrado.
+     * */
+    findById: (id) => database.livros.find(livro => livro.id === id),
 
-export const save = (livro) => {
-    database.livros.push(livro)
-}
+    /**
+     * Salva um novo livro no banco de dados.
+     * @param {Object} livro - O livro a ser salvo.
+     * @param {string} livro.id - O id do livro.
+     * @param {string} livro.titulo - O título do livro.
+     * @param {string} livro.autor - O autor do livro.
+     * @param {string} livro.editora - A editora do livro.
+     * @param {boolean} livro.emprestado - Se o livro está emprestado ou não.
+     * @returns {Object} - O livro salvo.
+     */
+    save: (livro) => {
+        const isBookExists = livroRepository.findById(livro.id)
+        if (isBookExists) {
+            Object.assign(isBookExists, livro);
+            return isBookExists;
+        } else {
+            livro.id = Date.now().toString();
+            database.livros.push(livro);
+            return livro;
+        }
+    },
 
-export const update = (titulo, id, editora, autor) => {
-    const livro = findByid()
-    livro.titulo = titulo
-    livro.id = id
-    livro.editora = editora
-    livro.autor = autor
-}
+    /**
+     * Remove um livro do banco de dados pelo ISBN.
+     * @param {string} id - O id do livro a ser removido.
+     */
+    
+    remove: (id) => {
+        const index = database.livros.findIndex(livro => livro.id === id);
+        if (index !== -1) {
+            database.livros.splice(index, 1);
+        } else {
+            throw new Error(`Livro com id ${id} não encontrado.`);
+        }
+    }
+};
 
-export const remove = (id) => {
-    const index = database.livros.findIndex(livro => livro.id === id)
-    database.livros.splice(index, 1)
-}
-
+export default livroRepository
